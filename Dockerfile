@@ -6,7 +6,7 @@ FROM rust:1.77 as builder
 WORKDIR /usr/src/app
 
 # Install OS dependencies if needed (e.g., for openssl)
-# RUN apt-get update &amp;&amp; apt-get install -y --no-install-recommends libssl-dev ca-certificates &amp;&amp; rm -rf /var/lib/apt/lists/*
+# RUN apt-get update && apt-get install -y --no-install-recommends libssl-dev ca-certificates && rm -rf /var/lib/apt/lists/*
 
 # Copy manifests first to leverage Docker cache for dependencies
 COPY Cargo.toml Cargo.lock ./
@@ -28,7 +28,7 @@ RUN cargo build --release --locked
 FROM debian:bullseye-slim as runtime
 
 # Install necessary runtime dependencies (like ca-certificates for HTTPS)
-RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates &amp;&amp; rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y --no-install-recommends ca-certificates && rm -rf /var/lib/apt/lists/*
 
 # Create a non-root user and group for security
 RUN groupadd --system app && useradd --system --gid app app
