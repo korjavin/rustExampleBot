@@ -1,0 +1,12 @@
+# Ignore build artifacts
+target/
+
+# Ignore Git directory and related files
+.git/
+.gitignore
+
+# Ignore environment files
+.env*
+
+# Ignore documentation unless needed in the image
+*.md
